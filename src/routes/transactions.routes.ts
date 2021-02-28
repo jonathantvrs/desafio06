@@ -1,5 +1,7 @@
-import multer from 'multer';
 import { Router } from 'express';
+
+import multer from 'multer';
+
 import { getCustomRepository } from 'typeorm';
 
 import TransactionsRepository from '../repositories/TransactionsRepository';
@@ -38,7 +40,7 @@ transactionsRouter.post('/', async (request, response) => {
 });
 
 transactionsRouter.delete('/:id', async (request, response) => {
-  const { id } = request.body;
+  const { id } = request.params;
 
   const deleteTransaction = new DeleteTransactionService();
 
