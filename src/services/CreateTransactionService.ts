@@ -1,13 +1,15 @@
 import { getCustomRepository, getRepository } from 'typeorm';
 import AppError from '../errors/AppError';
-import Category from '../models/Category';
-import Transaction from '../models/Transaction';
+
 import TransactionsRepository from '../repositories/TransactionsRepository';
+
+import Transaction from '../models/Transaction';
+import Category from '../models/Category';
 
 interface Request {
   title: string;
-  value: number;
   type: 'income' | 'outcome';
+  value: number;
   category: string;
 }
 
@@ -34,14 +36,14 @@ class CreateTransactionService {
     });
 
     if (!transactionCategory) {
-      transactionCategory = await categoryRepository.create({
+      transactionCategory = categoryRepository.create({
         title: category,
       });
 
       await categoryRepository.save(transactionCategory);
     }
 
-    const transaction = await transactionRepository.create({
+    const transaction = transactionRepository.create({
       title,
       value,
       type,
