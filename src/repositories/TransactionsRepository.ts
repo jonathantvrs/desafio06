@@ -15,10 +15,17 @@ class TransactionsRepository extends Repository<Transaction> {
 
     const { income, outcome } = allTransactions.reduce(
       (accumulator, transaction) => {
-        if (transaction.type === 'income') {
-          accumulator.income += Number(transaction.value);
-        } else if (transaction.type === 'outcome') {
-          accumulator.outcome += Number(transaction.value);
+        switch (transaction.type) {
+          case 'income':
+            accumulator.income += Number(transaction.value);
+            break;
+
+          case 'outcome':
+            accumulator.outcome += Number(transaction.value);
+            break;
+
+          default:
+            break;
         }
 
         return accumulator;
