@@ -13,7 +13,7 @@ const upload = multer(uploadConfig);
 
 const transactionsRouter = Router();
 
-transactionsRouter.get('/', async (_, response) => {
+transactionsRouter.get('/', async (request, response) => {
   const transactionRepository = getCustomRepository(TransactionsRepository);
 
   const transactions = await transactionRepository.find();
